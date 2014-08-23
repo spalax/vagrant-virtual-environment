@@ -1,0 +1,38 @@
+server {
+	listen 80; 
+
+	root ${rootdir};
+    index  index.html  index.htm  index.php ;
+
+	server_name ${servername};
+
+    location ^~ /app/ { deny all ; }
+ 
+    location ~ [^/]\.php(/|$) {
+      if (!-e $request_filename) { rewrite / /index.php last; } # ;
+      fastcgi_index index.php;
+      fastcgi_param PATH_INFO $fastcgi_path_info;
+      fastcgi_param PATH_TRANSLATED $document_root$fastcgi_path_info;
+      fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+      fastcgi_pass  ${fastcgipass};
+      fastcgi_split_path_info ^(.+\.php)(/.+)$;
+      include fastcgi_params;
+    }
+ 
+    location ^~ /includes/ { deny all ; }
+    location ^~ /lib/ { deny all ; }
+    location ^~ /media/downloadable/ { deny all ;}
+    location ^~ /pkginfo/ { deny all ;}
+    location ^~ /report/config.xml { deny all ; }
+
+    location ^~ /var { deny all ; }
+    location /. { return 404; }
+ 
+    location @handler { rewrite / /index.php; }
+ 
+    location / {
+      root  ${rootdir};
+      index  index.html  index.htm  index.php ;
+      try_files try_files $uri $uri/ @handler;
+    } 
+}

@@ -1,0 +1,37 @@
+server {
+	listen 80; 
+
+	root ${rootdir};
+
+	server_name ${servername};
+
+    location ~* \.(js|css|png|jpg|jpeg|gif|ico|html)$ {
+         expires max;
+         add_header Pragma public;
+         add_header Cache-Control "public";
+         log_not_found off;
+    }
+
+    location ~ ^/\. {
+        deny all;
+    }
+
+     error_page 403 404 502 503 504 = /index.php;
+ 
+     index index.html index.htm index.php;
+ 
+     location / {
+         try_files $uri $uri/ /index.php$is_args$args;
+     }
+      
+     # PHP-FPM Support
+     location ~ \.php$ {
+         if (!-e $request_filename) {rewrite / /index.php last; } ## Catch 404s that try_files miss
+         fastcgi_param HTTP_RANGE $http_range;
+         fastcgi_pass ${fastcgipass};
+         fastcgi_param  SCRIPT_FILENAME $document_root$fastcgi_script_name;
+         fastcgi_index index.php;
+         include fastcgi_params;
+         fastcgi_param SERVER_NAME $http_host;
+     }
+}
