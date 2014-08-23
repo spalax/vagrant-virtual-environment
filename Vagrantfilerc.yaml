@@ -85,7 +85,7 @@ apache:
             servername: awesome.dev
             serveraliases:
                 - www.awesome.dev
-            docroot: /var/www/awesome
+            docroot: /var/www
             port: '80'
             setenv:
                 - 'APP_ENV dev'
