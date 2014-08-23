@@ -111,7 +111,7 @@ nginx:
             server_name: awesome.dev
             server_aliases:
                 - www.awesome.dev
-            www_root: /var/www/awesome
+            www_root: /var/www
             listen_port: '80'
             location: \.php$
             index_files:
