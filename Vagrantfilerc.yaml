@@ -60,6 +60,8 @@ vagrantfile-local:
         shell: 'bash -l'
     vagrant:
         host: detect
+project:
+     type: magento
 server:
     install: '1'
     packages:
