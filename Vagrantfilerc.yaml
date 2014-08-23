@@ -9,10 +9,7 @@ vagrantfile-local:
         chosen_provider: virtualbox
         network:
             private_network: 192.168.56.101
-            forwarded_port:
-                uY19bmIdWrXK:
-                    host: '5379'
-                    guest: '22'
+            forwarded_port: { }
         post_up_message: ''
         provider:
             virtualbox:
@@ -66,6 +63,7 @@ server:
     install: '1'
     packages:
         - git
+        - vim
 firewall:
     install: '1'
     rules: null
