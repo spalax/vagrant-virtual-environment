@@ -64,6 +64,7 @@ server:
     packages:
         - git
         - vim
+        - htop
 firewall:
     install: '1'
     rules: null
