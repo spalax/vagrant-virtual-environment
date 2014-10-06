@@ -64,6 +64,7 @@ server:
     packages:
         - git
         - vim
+        - libmemcached-dev
         - htop
 firewall:
     install: '1'
