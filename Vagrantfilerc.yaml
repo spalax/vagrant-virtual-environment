@@ -37,6 +37,7 @@ vagrantfile-local:
                     args:
                         - '--verbose'
                         - '--archive'
+                        - '--del'
                         - '-z'
                     exclude:
                         - .vagrant/
