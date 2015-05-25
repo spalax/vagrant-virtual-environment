@@ -24,6 +24,10 @@ if [[ -f '/.puphpet-stuff/initial-setup-base-packages' ]]; then
 fi
 
 if [ "${OS}" == 'debian' ] || [ "${OS}" == 'ubuntu' ]; then
+    echo 'Setting testing repo'
+    sed -i -e 's/ \(stable \|wheezy \)/ testing /ig' /etc/apt/sources.list
+    echo 'Finished setting testing repo'
+
     echo 'Running initial-setup apt-get update'
     apt-get update >/dev/null
     echo 'Finished running initial-setup apt-get update'
